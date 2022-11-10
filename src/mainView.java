@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.event.*;
+import javax.swing.event.*;
 
 public class mainView extends JFrame {
     Color mainYellow = Color.decode("#FFEB94");
@@ -26,7 +27,7 @@ public class mainView extends JFrame {
             int ypos = (int)(screen.getHeight()/2 - super.getHeight()/2);
             setLocation(xpos, ypos);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+            
             // Text, Item 넣기
             p1 = new TextPanel();
             p1.setBackground(mainYellow);
@@ -44,6 +45,8 @@ public class mainView extends JFrame {
             container.add(p1, BorderLayout.NORTH);
             container.add(p2, BorderLayout.CENTER);
             container.add(p3, BorderLayout.SOUTH);
+            GridLayout grid = new GridLayout(2, 2, 5, 5);
+            p3.setLayout(grid);
 
             this.setLocationRelativeTo(null);
             this.setVisible(true);
@@ -52,6 +55,7 @@ public class mainView extends JFrame {
             exception.printStackTrace();
         }
     }
+    
 
     class TextPanel extends JPanel {
         public TextPanel() {
@@ -90,33 +94,75 @@ public class mainView extends JFrame {
     // 버튼 위에 마우스가 올라가면 페이지로 이동한다는 안내 메시지가 있으면 좋을 것 같아요!!
     class MainButton extends JPanel {
         public MainButton() {
+        	
+        	ToolTipManager m = ToolTipManager.sharedInstance();
+            m.setInitialDelay(0);
+            m.setDismissDelay(3000);
+        	
             JButton java = new JButton("JAVA");
             java.setBackground(mainOrange);
             java.setOpaque(true);
             java.setBorderPainted(false);
+            java.setToolTipText("Java 페이지로 이동합니다.");
             add(java);
 
             JButton python = new JButton("PYTHON");
             python.setBackground(mainOrange);
             python.setOpaque(true);
             python.setBorderPainted(false);
+            python.setToolTipText("python 페이지로 이동합니다.");
             add(python);
 
             JButton js = new JButton("JS");
             js.setBackground(mainOrange);
             js.setOpaque(true);
             js.setBorderPainted(false);
+            js.setToolTipText("js 페이지로 이동합니다.");
             add(js);
 
             JButton swift = new JButton("SWIFT");
             swift.setBackground(mainOrange);
             swift.setOpaque(true);
             swift.setBorderPainted(false);
+            swift.setToolTipText("swift 페이지로 이동합니다.");
             add(swift);
+            
+            // 버튼 크기 조정
+            java.setPreferredSize(new Dimension(170, 90));
+            
+            java.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new java();
+            	}
+            });
+            
+            python.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new python();
+            	}
+            });
+            
+            js.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new js();
+            	}
+            });
+            
+            swift.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new swift();
+            	}
+            });
         }
     }
-
-
 	
 	public static void main(String[] args) {
         new mainView();
