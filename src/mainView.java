@@ -13,14 +13,18 @@ public class mainView extends JFrame {
     JLabel imageLabel = new JLabel();
     JLabel sLabel = new JLabel();
     JLabel lLabel = new JLabel();
+    JLabel Label = new JLabel();
+    JButton write = new JButton("writing");
+    
     Font sEngFont = new Font("Gmarket Sans", Font.BOLD, 10);
     Font lEngFont = new Font("Gmarket Sans", Font.BOLD, 90);
+    Font mEngFont = new Font("Gmarket Sans", Font.BOLD, 20);
 
     // MainView
     public mainView() {
         try {
             // 잡지 규격에 맞춤. (약간씩만 늘림.)
-            this.setSize(736,950);
+            this.setSize(1024,768);
             // 모니터 가운데 배치
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             int xpos = (int)(screen.getWidth()/2 - super.getWidth()/2);
@@ -55,9 +59,9 @@ public class mainView extends JFrame {
             exception.printStackTrace();
         }
     }
-    
 
     class TextPanel extends JPanel {
+ 
         public TextPanel() {
             // textPanel
             JPanel textPanel = new JPanel();
@@ -74,20 +78,44 @@ public class mainView extends JFrame {
             lLabel.setHorizontalAlignment(sLabel.getVerticalAlignment());
             lLabel.setHorizontalAlignment(JLabel.CENTER);
             textPanel.add(lLabel, BorderLayout.CENTER);
-
+            
+            // JButton write
+            write.setHorizontalAlignment(JLabel.RIGHT);
+            write.setToolTipText("글쓰기 페이지로 이동합니다.");
+            textPanel.add(write, BorderLayout.NORTH);
+            
             add(textPanel);
+            
+            write.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new write();
+            	}
+            });
         }
     }
 
     class ItemPanel extends JPanel {
         public ItemPanel() {
+        	JPanel p = new JPanel();
+        	p.setLayout(new BorderLayout());
+        	p.setBackground(mainYellow);
+        	add(p, BorderLayout.CENTER);
+        	
             // Image (gif)
             ImageIcon ii = new ImageIcon("images/300mainImage.gif");
-            // Image 사이즈가 2개인데 주석처리 된 건 너무 큰 것 같아서 300 사이즈로 일단 해뒀습니다!
-//            ImageIcon ii = new ImageIcon("images/mainImage.gif");
+
+            // ImageIcon ii = new ImageIcon("images/mainImage.gif");
             imageLabel.setIcon(ii);
             imageLabel.setHorizontalAlignment(JLabel.CENTER);
-            add(imageLabel, BorderLayout.SOUTH);
+            p.add(imageLabel, BorderLayout.CENTER);
+            
+            Label.setFont(mEngFont);
+            Label.setText("MFD는 개발 입문자와 초보자를 위한 웹 매거진입니다.");
+            Label.setBorder(BorderFactory.createEmptyBorder(10 , 10 , 0 , 0));
+            Label.setHorizontalAlignment(JLabel.CENTER);
+            p.add(Label, BorderLayout.SOUTH);
         }
     }
 
@@ -128,7 +156,7 @@ public class mainView extends JFrame {
             add(swift);
             
             // 버튼 크기 조정
-            java.setPreferredSize(new Dimension(170, 90));
+            //java.setPreferredSize(new Dimension(170, 90));
             
             java.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
@@ -163,7 +191,7 @@ public class mainView extends JFrame {
             });
         }
     }
-	
+ 
 	public static void main(String[] args) {
         new mainView();
 	}
