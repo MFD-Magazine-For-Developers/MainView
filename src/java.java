@@ -14,7 +14,7 @@ public class java extends JFrame{
 		setTitle("Java");
 		setVisible(true);
 		// 잡지 규격에 맞춤. (약간씩만 늘림.)
-        this.setSize(736,950);
+        this.setSize(1024,768);
         // 모니터 가운데 배치
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int xpos = (int)(screen.getWidth()/2 - super.getWidth()/2);
