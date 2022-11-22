@@ -65,13 +65,15 @@ public class mainView extends JFrame {
         public TextPanel() {
             // textPanel
             JPanel textPanel = new JPanel();
-            textPanel.setLayout(new BorderLayout());
+            
+            textPanel.setLayout(new FlowLayout());
             textPanel.setBackground(mainYellow);
             // Text(Label) - small
             sLabel.setFont(sEngFont);
             sLabel.setText("I WANT TO BE A");
             sLabel.setHorizontalAlignment(JLabel.LEFT);
             textPanel.add(sLabel, BorderLayout.NORTH);
+            
             // Text(Label) - Large
             lLabel.setFont(lEngFont);
             lLabel.setText("Developers");
@@ -95,6 +97,8 @@ public class mainView extends JFrame {
             });
         }
     }
+    
+    
 
     class ItemPanel extends JPanel {
         public ItemPanel() {
@@ -127,6 +131,13 @@ public class mainView extends JFrame {
             m.setInitialDelay(0);
             m.setDismissDelay(3000);
         	
+            JButton info = new JButton("About MFD");
+            info.setBackground(mainOrange);
+            info.setOpaque(true);
+            info.setBorderPainted(false);
+            info.setToolTipText("MFD 설명 페이지로 이동합니다.");
+            add(info);
+            
             JButton java = new JButton("JAVA");
             java.setBackground(mainOrange);
             java.setOpaque(true);
@@ -157,6 +168,14 @@ public class mainView extends JFrame {
             
             // 버튼 크기 조정
             //java.setPreferredSize(new Dimension(170, 90));
+            
+            info.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		dispose(); //현재 윈도우만 닫힘
+            		//setVisible(false);
+            		new info();
+            	}
+            });
             
             java.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
